@@ -4,17 +4,18 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/spf13/cobra"
 	"github.com/kevinjqiu/artillery-operator/pkg/artillery"
+	"github.com/spf13/cobra"
 )
 
-cfg artillery.Config
+var cfg artillery.Config
 
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
 	Use:   "artillery-operator",
 	Short: "A brief description of your application",
-	Run:   func(cmd *cobra.Command, args []string) {},
+	Run: func(cmd *cobra.Command, args []string) {
+	},
 }
 
 // Execute adds all child commands to the root command sets flags appropriately.

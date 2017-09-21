@@ -6,6 +6,6 @@ import (
 
 type Config struct {
 	Host        string
-	TLSConfig   *rest.TLSClientConfig
+	TLSConfig   rest.TLSClientConfig
 	TLSInsecure bool
 }
