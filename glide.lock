@@ -1,5 +1,5 @@
 hash: 6e5a1f6ec21e3af6b4eb17c0d5b5b02083210e11662d344587136618ee704a89
-updated: 2017-09-21T16:07:36.332585054-04:00
+updated: 2017-09-21T16:13:17.856912022-04:00
 imports:
 - name: github.com/blang/semver
   version: 31b736133b98f26d5e078ec9eb591666edfd091f
@@ -53,9 +53,9 @@ imports:
 - name: github.com/PuerkitoBio/urlesc
   version: 5bd2802263f21d8788851d5305584c82a5c75d7e
 - name: github.com/spf13/cobra
-  version: 4d647c8944eb42504a714e57e97f244ed6344722
+  version: b78744579491c1ceeaaa3b40205e56b0591b93a3
 - name: github.com/spf13/pflag
-  version: 5ccb023bc27df288a957c5e994cd44fd19619465
+  version: 7aff26db30c1be810f9de5038ec5ef96ac41fd7c
 - name: github.com/ugorji/go
   version: f1f1a805ed361a0e078bb537e4ea78cd37dcf065
   subpackages:
