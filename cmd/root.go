@@ -18,21 +18,26 @@ var cfg artillery.Config
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
 	Use:   "artillery-operator",
-	Short: "A brief description of your application",
+	Short: "A Kubernetes Operator for running artillery (artillery.io) load testing jobs in a cluster",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		logrus.Info("Starting...")
+
+		op, err := artillery.New(cfg)
+		if err != nil {
+			return err
+		}
+
 		ctx, cancel := context.WithCancel(context.Background())
 		wg, ctx := errgroup.WithContext(ctx)
 
 		term := make(chan os.Signal)
 		signal.Notify(term, os.Interrupt, syscall.SIGTERM)
 
-		op := artillery.Operator{}
 		wg.Go(func() error { return op.Run(ctx.Done()) })
 
 		select {
 		case <-term:
-			logrus.Info("received SIGTERM, exiting gracefully...")
+			logrus.Info("Received SIGTERM, exiting gracefully...")
 		case <-ctx.Done():
 		}
 
