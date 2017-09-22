@@ -1,11 +1,14 @@
 package cmd
 
 import (
+	"context"
 	"fmt"
 	"os"
 
+	log "github.com/Sirupsen/logrus"
 	"github.com/kevinjqiu/artillery-operator/pkg/artillery"
 	"github.com/spf13/cobra"
+	"golang.org/x/sync/errgroup"
 )
 
 var cfg artillery.Config
@@ -14,7 +17,25 @@ var cfg artillery.Config
 var RootCmd = &cobra.Command{
 	Use:   "artillery-operator",
 	Short: "A brief description of your application",
-	Run: func(cmd *cobra.Command, args []string) {
+	RunE: func(cmd *cobra.Command, args []string) error {
+		log.Info("Starting...")
+		ctx, cancel := context.WithCancel(context.Background())
+		wg, ctx := errgroup.WithContext(ctx)
+
+		term := make(chan os.Signal)
+
+		select {
+		case <-term:
+			log.Info("received SIGTERM, exiting gracefully...")
+		case <-ctx.Done():
+		}
+
+		cancel()
+
+		if err := wg.Wait(); err != nil {
+			return err
+		}
+		return nil
 	},
 }
 
