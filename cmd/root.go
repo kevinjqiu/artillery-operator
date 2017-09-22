@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"os/signal"
+	"syscall"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/kevinjqiu/artillery-operator/pkg/artillery"
@@ -23,9 +25,10 @@ var RootCmd = &cobra.Command{
 		wg, ctx := errgroup.WithContext(ctx)
 
 		term := make(chan os.Signal)
+		signal.Notify(term, os.Interrupt, syscall.SIGTERM)
 
 		op := artillery.Operator{}
-		wg.Go(func() error { return op.Run(ctx.Done() )})
+		wg.Go(func() error { return op.Run(ctx.Done()) })
 
 		select {
 		case <-term:
