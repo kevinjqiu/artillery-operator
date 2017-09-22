@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	log "github.com/Sirupsen/logrus"
+	"github.com/Sirupsen/logrus"
 	"github.com/kevinjqiu/artillery-operator/pkg/artillery"
 	"github.com/spf13/cobra"
 	"golang.org/x/sync/errgroup"
@@ -18,15 +18,18 @@ var RootCmd = &cobra.Command{
 	Use:   "artillery-operator",
 	Short: "A brief description of your application",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		log.Info("Starting...")
+		logrus.Info("Starting...")
 		ctx, cancel := context.WithCancel(context.Background())
 		wg, ctx := errgroup.WithContext(ctx)
 
 		term := make(chan os.Signal)
 
+		op := artillery.Operator{}
+		wg.Go(func() error { return op.Run(ctx.Done() )})
+
 		select {
 		case <-term:
-			log.Info("received SIGTERM, exiting gracefully...")
+			logrus.Info("received SIGTERM, exiting gracefully...")
 		case <-ctx.Done():
 		}
 
