@@ -1,4 +1,4 @@
-package v1alph1
+package v1alpha1
 
 import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -12,7 +12,8 @@ type Artillery struct {
 }
 
 type ArtillerySpec struct {
-	BaseImage string `json:"baseImage,omitempty"`
+	BaseImage  string                 `json:"baseImage,omitempty"`
+	TestScript map[string]interface{} `json:"testScript"`
 }
 
 type ArtilleryStatus struct {
