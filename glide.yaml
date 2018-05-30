@@ -1,6 +1,0 @@
-package: github.com/kevinjqiu/artillery-operator
-import:
-    - package: k8s.io/client-go
-      version: v2.0.0
-    - package: github.com/spf13/cobra
-    - package: github.com/sirupsen/logrus

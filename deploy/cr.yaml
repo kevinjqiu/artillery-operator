@@ -1,0 +1,4 @@
+apiVersion: "api.idempotent.ca/v1alpha1"
+kind: "Artillery"
+metadata:
+  name: "example"

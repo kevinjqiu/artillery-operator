@@ -1,0 +1,3 @@
+apiVersion: api.idempotent.ca/v1alpha1
+kind: Artillery
+projectName: artillery-operator
